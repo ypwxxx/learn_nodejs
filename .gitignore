@@ -1,0 +1,9 @@
+# windows:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# javascript
+
+# node
+node_modules/
