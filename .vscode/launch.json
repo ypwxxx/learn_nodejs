@@ -7,8 +7,15 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/index.js"
+            "name": "启动程序",
+            "preLaunchTask": "typescript",
+            "program": "${workspaceFolder}/src/main.ts",
+            "cwd": "${workspaceFolder}",
+            "protocol": "inspector",
+            "sourceMaps": true,
+            "outFiles": [
+                "${workspaceFolder}/bin/**/*.js"
+            ]
         }
     ]
 }

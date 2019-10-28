@@ -1,0 +1,27 @@
+{
+  "name": "learn_nodejs",
+  "version": "1.0.0",
+  "description": "learn nodejs",
+  "main": "app.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ypwxxx/learn_nodejs.git"
+  },
+  "author": "ypw",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ypwxxx/learn_nodejs/issues"
+  },
+  "homepage": "https://github.com/ypwxxx/learn_nodejs#readme",
+  "dependencies": {
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.5",
+    "express": "^4.17.1"
+  }
+}
