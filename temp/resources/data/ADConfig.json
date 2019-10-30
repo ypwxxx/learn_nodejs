@@ -1,0 +1,75 @@
+{		
+	"mainKey":"FC_1",	
+	"menubanner":1,	
+	"insertId": "adunit-682afb1f43f89cda",
+	"FC_1":{	
+		"id":"FC_1",
+		"banner1":"be4d1ab46ada59ae",
+		"banner2":"79ca91c8bf9d2952",
+		"banner3":"0",
+		"banner4":"4ac1eb82fcbad86a",
+		"banner5": "d820a8afb5839113",
+		"voide1":"0",
+		"voide2":"0",
+		"voide3":"0"
+	},	
+	"FC_2":{	
+		"id":"FC_2",
+		"banner1":"be4d1ab46ada59ae",
+		"banner2":"f332edb336b9bb2f",
+		"banner3":"0",
+		"banner4":"4ac1eb82fcbad86a",
+		"banner5": "d820a8afb5839113",
+		"voide1":"0",
+		"voide2":"0",
+		"voide3":"0"
+	},	
+	"HXG":{	
+		"id":"HXG",
+		"banner1":"be4d1ab46ada59ae",
+		"banner2":"df1115926e954913",
+		"banner3":"be4d1ab46ada59ae",
+		"banner4":"4ac1eb82fcbad86a",
+		"banner5": "d820a8afb5839113",
+		"video1":"6bb4c49caee8546f",
+		"video2":"60f7b9f91d97011b",
+		"video3":"7c9da988f1df923e"
+	},	
+	"BBDN":{	
+		"id":"BBDN",
+		"banner1":"be4d1ab46ada59ae",
+		"banner2":"5a169ad017e73d4a",
+		"banner3":"be4d1ab46ada59ae",
+		"banner4":"4ac1eb82fcbad86a",
+		"banner5": "d820a8afb5839113",
+		"video1":"ac8b1ee34a9d2c67",
+		"video2":"3915d63e3787a21d",
+		"video3":"6ac1b4124be865a4"
+	},
+	"N2048":{	
+		"id":"N2048",
+		"banner1":"be4d1ab46ada59ae",
+		"banner2":"00d503774ca60371",
+		"banner3":"be4d1ab46ada59ae",
+		"banner4":"be4d1ab46ada59ae",
+		"banner5":"d820a8afb5839113",
+		"video1":"462d4b66917ec8c7",
+		"video2":"462d4b66917ec8c7",
+		"video3":"462d4b66917ec8c7",
+		"video4":"462d4b66917ec8c7",
+		"video5":"462d4b66917ec8c7",    
+		"video6":"462d4b66917ec8c7"
+	},
+	"HC":{	
+		"id":"HC",
+		"banner1":"be4d1ab46ada59ae",
+		"banner2":"988fe328417d3ab7",
+		"banner3":"be4d1ab46ada59ae",
+		"banner4":"be4d1ab46ada59ae",
+		"banner5":"d820a8afb5839113",
+		"video1":"a0c2270add9d925e",
+		"video2":"a0c2270add9d925e",
+		"video3":"a0c2270add9d925e",
+		"video4":"a0c2270add9d925e"
+	}
+}	

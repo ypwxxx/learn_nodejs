@@ -1,0 +1,58 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "logoClip",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 2,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 1.9666666666666666,
+          "value": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 2,
+          "value": [
+            0,
+            0
+          ]
+        }
+      ],
+      "opacity": [
+        {
+          "frame": 0,
+          "value": 255
+        },
+        {
+          "frame": 1.5,
+          "value": 255
+        },
+        {
+          "frame": 1.9666666666666666,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": [
+    {
+      "frame": 2,
+      "func": "logoHide",
+      "params": []
+    }
+  ]
+}

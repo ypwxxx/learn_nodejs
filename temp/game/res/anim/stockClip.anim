@@ -1,0 +1,97 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "stockClip",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.1666666666666667,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "91fb16e1-53ba-4aaa-ac2a-1949e9f37a02"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "3da9868c-70ed-44f0-b743-a85025c18c73"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "5fb64e14-519e-4852-8e3d-12b49ad9041c"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "9078f4b1-a02f-4d7f-b595-ab7104901352"
+            }
+          },
+          {
+            "frame": 0.38333333333333336,
+            "value": {
+              "__uuid__": "aebc370f-3609-425d-9660-65ba9b928029"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "7c498e45-0fb9-4cc9-b4ec-79e112dae3b0"
+            }
+          },
+          {
+            "frame": 0.6,
+            "value": {
+              "__uuid__": "91fb16e1-53ba-4aaa-ac2a-1949e9f37a02"
+            }
+          },
+          {
+            "frame": 0.7,
+            "value": {
+              "__uuid__": "3da9868c-70ed-44f0-b743-a85025c18c73"
+            }
+          },
+          {
+            "frame": 0.8,
+            "value": {
+              "__uuid__": "5fb64e14-519e-4852-8e3d-12b49ad9041c"
+            }
+          },
+          {
+            "frame": 0.9,
+            "value": {
+              "__uuid__": "9078f4b1-a02f-4d7f-b595-ab7104901352"
+            }
+          },
+          {
+            "frame": 1,
+            "value": {
+              "__uuid__": "aebc370f-3609-425d-9660-65ba9b928029"
+            }
+          },
+          {
+            "frame": 1.1166666666666667,
+            "value": {
+              "__uuid__": "7c498e45-0fb9-4cc9-b4ec-79e112dae3b0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 1.1666666666666667,
+      "func": "stockRunOver",
+      "params": []
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "6d26b0f8-e124-4098-b2d9-c948c9f33875",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "天梨飞行棋": {
+      "ver": "1.0.4",
+      "uuid": "f4d076ba-718e-400e-aea6-8c1e8106373a",
+      "rawTextureUuid": "6d26b0f8-e124-4098-b2d9-c948c9f33875",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 482,
+      "height": 207,
+      "rawWidth": 484,
+      "rawHeight": 210,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

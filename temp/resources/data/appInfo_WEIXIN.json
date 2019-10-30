@@ -1,0 +1,33 @@
+{
+    "appId": "wx3a81ca690185a1e3",
+    "sh": "sh12",
+    "appVer": "1.2.81",
+    "startScene": "FC_Menu",
+    "mainKey": {
+      "name": "FC",
+      "title": "",
+      "image": null,
+      "gameScene": "FC_Game"
+    },
+    "otherKey": [
+        {
+            "name": "BBDN",
+            "title": "方块消消消，时间飞起来！",
+            "image": "http://weixin.gzfingertip.cn/wegame/sharepic/dnbbfk.jpg",
+            "gameScene": "BBDN_GameScene"
+        },
+        {
+          "name": "N2048",
+          "title": "据说能拼出2048的人，智商都在120以上！",
+          "image": "http://weixin.gzfingertip.cn/wegame/sharepic/2048.jpg",
+          "gameScene": "N2048_GamaScene"
+        },
+        {
+          "name": "HC",
+          "title": "玩过这个游戏的人，智商都在120以上！",
+          "image": "https://weixin.gzfingertip.cn/wegame/sharepic/szhhl.jpg",
+          "gameScene": "HC_GameScene"
+        }
+    ],
+    "info": "批文：新广出审【2016】7428号\n出版物号：ISBN978-7-498-00459-8\n出版服务单位：天津电子出版社有限公司\n文网游备字：〔2017〕Ｍ-CSG 2097号\n著作权人：武汉指娱互动信息技术有限公司"
+  }
