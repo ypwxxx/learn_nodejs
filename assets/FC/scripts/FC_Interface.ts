@@ -1,4 +1,5 @@
 import FC_ChessPoint from "./FC_ChessPoint";
+import FC_PlaneModel from "./FC_PlaneModel";
 
 // 接口
 
@@ -17,4 +18,10 @@ export interface PlayerTypeChessPointArray {
     yellow: FC_ChessPoint[],
     blue: FC_ChessPoint[],
     green: FC_ChessPoint[]
+};
+
+// 飞机控制器初始化
+export interface PlaneContronllerInit {
+    model: FC_PlaneModel,
+    pool: cc.NodePool,
 }

@@ -1,4 +1,5 @@
-import Comm_AssetsComponent from "./Comm_AssetsComponent";
+import Comm_AssetsComponent from "../component/assets/scripts/Comm_AssetsComponent";
+import Comm_Log from "./Comm_Log";
 
 /**
  * 资源类
@@ -11,8 +12,14 @@ export default class Comm_Assets {
         this._spriteFrameMap = {};
     };
     private static instance: Comm_Assets = null;
-    public static getInstance(target: Comm_AssetsComponent): Comm_Assets{
-        this.instance = this.instance ? this.instance : new Comm_Assets(target);
+    public static getInstance(target?: Comm_AssetsComponent): Comm_Assets{
+        if(!this.instance){
+            if(target instanceof Comm_AssetsComponent){
+                this.instance = new Comm_Assets(target);
+            }else{
+                Comm_Log.warn('资源类组件未定义');
+            }
+        }
         return this.instance;
     };
 

@@ -45,8 +45,8 @@ export enum PLAYER_TYPE {
  */
 export const COMMAND_PLANE = {
     set_skin: 'set_skin',       // 设置皮肤
-    set_pos: 'set_pos',         // 设置位置
-    move_step_to: 'move_step_to',     // 移动到
-    play_anim_standby_choose: 'play_anim_standby_choose',       // 播放待选中动画
+    set_pos: 'set_pos',         // 设置位置(带方向)
+    move_to: 'move_to',     // 移动到(带方向)
+    play_anim: 'play_anim',       // 播放飞机动画
     feedback_pos: 'feedback_pos',       // 反馈位置
 };
