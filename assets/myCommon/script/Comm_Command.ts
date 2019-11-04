@@ -1,5 +1,5 @@
 /**
- * 指令
+ * 指令类
  */
 export default class Comm_Command {
     public constructor(command: string, content: any = null) {

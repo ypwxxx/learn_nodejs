@@ -36,16 +36,20 @@ export default class Comm_Binder {
                 return;
             }
         }
-        if(this.findMC(m) !== -1 || this.findMC(c) !== -1){
-            // m / c已经绑定了
-            return;   
+        if(this.findMC(c) !== -1){
+            // c已经绑定了
+            return;
         }
         let mc: M_C = {
             model: m,
             contronller: c
         };
-        m.bindContronller = c;
-        c.bindModel = m;
+        m.sendMessageToContronller = function(command){
+            mc.contronller.receivedMessageByModel(command);
+        }.bind(m);
+        c.sendMessageToModel = function(command){
+            mc.model.receivedMessageByContronller(command);
+        }.bind(c);
         this._binder.push(mc);
     };
 
@@ -98,7 +102,9 @@ export default class Comm_Binder {
     public deleteMC(mc: Comm_Model | Comm_Contronller | Comm_ContronllerComponent | cc.Node){
         let index = Number(this.findMC(mc));
         if( index > -1){
-            this._binder.splice(index, 1);
+            let mc = this._binder.splice(index, 1);
+            mc[0].contronller.sendMessageToModel = null;
+            mc[0].model.sendMessageToContronller = null;
         }
     };
 
@@ -107,7 +113,9 @@ export default class Comm_Binder {
      */
     public deleteAll(){
         while(this._binder.length != 0){
-            this._binder.pop();
+            let mc = this._binder.pop();
+            mc.contronller.sendMessageToModel = null;
+            mc.model.sendMessageToContronller = null;
         }
     };
 };

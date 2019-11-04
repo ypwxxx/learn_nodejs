@@ -1,31 +1,42 @@
-// Learn TypeScript:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
+import { PLANE_TYPE } from "./FC_Constant";
 
-const {ccclass, property} = cc._decorator;
+/**
+ * 游戏数据类
+ */
 
-@ccclass
-export default class NewClass extends cc.Component {
+export default class FC_GameData {
+    private constructor(){};
+    private static instance: FC_GameData = null;
+    public static getInstance(): FC_GameData{
+        this.instance = this.instance ? this.instance : new FC_GameData();
+        return this.instance;
+    };
 
-    @property(cc.Label)
-    label: cc.Label = null;
+    private _playerCount: number = 0;               // 本局游戏的人数
+    private _playerType: PLANE_TYPE[] = null;          // 本局参与的飞机类型
 
-    @property
-    text: string = 'hello';
+    public get playerCount(): number {
+        return this._playerCount;
+    };
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
-
-    start () {
-
+    public get playerType(): PLANE_TYPE[] {
+        return this._playerType;
     }
 
-    // update (dt) {}
+    // 设置开始游戏信息
+    public setStartInfo(typeArr: PLANE_TYPE[]){
+        this._playerCount = typeArr.length;
+        this._playerType = [];
+        for(let i = 0; i < typeArr.length; i++){
+            this._playerType.push(typeArr[i]);
+        }
+    };
+
+    // 获取开始游戏信息
+    public getStartInfo(){
+        return {
+            count: this._playerCount,
+            types: this._playerType
+        }
+    };
 }

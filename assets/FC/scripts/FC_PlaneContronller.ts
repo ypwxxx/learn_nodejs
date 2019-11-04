@@ -1,11 +1,9 @@
 import Comm_ContronllerComponent from "../../myCommon/script/Comm_ContronllerComponent";
-import Comm_Binder from "../../myCommon/script/Comm_Binder";
-import FC_PlaneModel from "./FC_PlaneModel";
 import { COMMAND_PLANE } from "./FC_Constant";
 import Comm_Command from "../../myCommon/script/Comm_Command";
-import { PlaneContronllerInit } from "./FC_Interface";
 import Comm_Assets from "../../myCommon/script/Comm_Assets";
 import Comm_Log from "../../myCommon/script/Comm_Log";
+import { CommFunc } from "../../myCommon/script/Comm_Modules";
 
 /**
  * 飞机控制类
@@ -22,15 +20,14 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
 
     private _pool: cc.NodePool = null;                  // 对象池
     private _assetsInstance: Comm_Assets = null;        // 资源类实例
+    private _canTouch: boolean = false;                 // 能否点击
 
-    public reuse(obj: PlaneContronllerInit){
+    public reuse(pool: cc.NodePool){
 
         this._restores();
 
-        this._pool = obj.pool;
+        this._pool = pool;
         this._assetsInstance = Comm_Assets.getInstance();
-        // 绑定
-        Comm_Binder.getInstance().bindMC(obj.model, this);
         // 添加点击事件监听
         this.node.on(cc.Node.EventType.TOUCH_END, this._touchEnd, this);
     };
@@ -39,8 +36,6 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
 
         this._restores();
 
-        // 解绑
-        Comm_Binder.getInstance().deleteMC(this);
         // 取消点击事件监听
         this.node.off(cc.Node.EventType.TOUCH_END, this._touchEnd, this);
     };
@@ -48,27 +43,20 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
     // 回收
     public recircle(){
         this._pool.put(this.node);
-    }
-
-    // 还原
-    private _restores(){
-        this.node.scale = 1;
-        this.node.stopAllActions();
-        this._pool = null;
-        this._assetsInstance = null;
-        this.planeAnim.stop();
     };
 
-    // 点击
-    private _touchEnd(){
-
-    }
+    // 销毁
+    public onDestroy(){
+        if(cc.isValid(this.node)){
+            this.node.off(cc.Node.EventType.TOUCH_END, this._touchEnd, this);
+        }
+    };
 
     // 接收信息
     public receivedMessageByModel(command: Comm_Command){
         command.complete = true;
         if(!command.checkCommand(1)){
-            Comm_Log.log('plane指令没有指定指令名');
+            Comm_Log.log(command.failError.msg);
         }
         switch(command.command){
             case COMMAND_PLANE.set_skin :
@@ -79,6 +67,12 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
                 this._playAnim(command);
             case COMMAND_PLANE.move_to:
                 this._moveTo(command);
+            case COMMAND_PLANE.set_rotation:
+                this._setRotation(command);
+            case COMMAND_PLANE.allow_touch:
+                this._allowTouch(command);
+            default:
+                break;
         }
     };
 
@@ -112,13 +106,23 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
         if(!command.checkCommand(2)){
             return;
         }
-        let pos: cc.Vec2 = command.content.pos;
-        let rotation: number = command.content.dir;
+        let pos: cc.Vec2 = command.content;
         if(pos instanceof cc.Vec2){
             this.node.setPosition(pos);
         }
+    };
+
+    /**
+     * 设置旋转度
+     * @param command 
+     */
+    private _setRotation(command: Comm_Command){
+        if(!command.checkCommand(2)){
+            return;
+        }
+        let rotation: number = command.content;
         if(typeof rotation === 'number'){
-            this.node.setRotation(rotation);
+            this.node.rotation = rotation;
         }
     };
 
@@ -140,6 +144,18 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
     };
 
     /**
+     * 播放动画
+     * @param command 
+     */
+    private _allowTouch(command: Comm_Command){
+        if(!command.checkCommand(2)){
+            return;
+        }
+
+        this._canTouch = true;
+    };
+
+    /**
      * 移动
      * @param command 
      */
@@ -148,21 +164,51 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
             return;
         }
 
-        let targetArr = command.content;
+        let targetArr = command.content.targetArr;
+        let moveTime = command.content.moveTime;
         if(Array.isArray(targetArr)){
-            // this.node.runAction(cc.sequence(
-            //     cc.moveTo(),
-            // ));
+            this._moveCallback(-1, targetArr, moveTime);
         }else{
             Comm_Log.warn('plane移动指令参数错误');
         }
     };
 
-    // 销毁
-    public onDestroy(){
-        if(cc.isValid(this.node)){
-            this.node.off(cc.Node.EventType.TOUCH_END, this._touchEnd, this);
+    // 移动回调
+    private _moveCallback(curIndex: number, targetArr: any[], moveTime: number) {
+        this.node.stopAllActions();
+        let index = curIndex + 1;
+        if(index < targetArr.length){
+            this.node.runAction(cc.sequence(
+                cc.moveTo(moveTime, targetArr[index].pos).easing(cc.easeCubicActionOut()),
+                cc.callFunc(() => {
+                    if(typeof targetArr[index].rotation === 'number'){
+                        this.node.rotation = targetArr[index].rotation;
+                    }
+                    this._moveCallback(index, targetArr, moveTime);
+                })
+            ));
+        }else if(index === targetArr.length){
+            Comm_Log.log('飞机移动完成');
+            let cod: Comm_Command = CommFunc.getCommand([COMMAND_PLANE.feedback_move_end]);
+            this.sendMessageToModel(cod);
         }
-        Comm_Binder.getInstance().deleteMC(this);
-    }
+    };
+
+    // 还原
+    private _restores(){
+        this.node.scale = 1;
+        this.node.stopAllActions();
+        this._pool = null;
+        this._assetsInstance = null;
+        this.planeAnim.stop();
+    };
+
+    // 点击
+    private _touchEnd(){
+        if(this._canTouch){
+            let cod: Comm_Command = CommFunc.getCommand([COMMAND_PLANE.feedback_be_touch]);
+            this.sendMessageToModel(cod);
+            this._canTouch = false;
+        }
+    };
 }

@@ -20,8 +20,10 @@ export interface PlayerTypeChessPointArray {
     green: FC_ChessPoint[]
 };
 
-// 飞机控制器初始化
-export interface PlaneContronllerInit {
-    model: FC_PlaneModel,
-    pool: cc.NodePool,
-}
+// 飞机棋子对象类型
+export interface PlaneChesserObject {
+    red: FC_PlaneModel[],
+    yellow: FC_PlaneModel[],
+    blue: FC_PlaneModel[],
+    green: FC_PlaneModel[]
+};

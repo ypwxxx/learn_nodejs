@@ -1,3 +1,5 @@
+import Comm_Command from "./Comm_Command";
+
 /* *公共方法* */
 
 export default class CommFunc {
@@ -95,4 +97,20 @@ export default class CommFunc {
         }
         return objClone;
     };
+
+    /**
+     * 获取命令
+     * @param title 命令名
+     * @param content 内容
+     */
+    public getCommand(title: string | string[], content?: any){
+        let msg = '';
+        if(Array.isArray(title)){
+            msg = title.join('');
+        }else{
+            msg = title;
+        }
+        let cod = new Comm_Command(msg, content);
+        return cod;
+    }
 }
