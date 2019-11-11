@@ -37,6 +37,8 @@ export default class FC_PlaneModel extends Comm_Model {
     private static _StandbyAnimName = 'plane_standby';
     // 移动间隙时间
     private static _MoveTime = 0.5;
+    // 动画时间
+    private static _AnimTime = 1.0;
 
     private _type: PLANE_TYPE = null;           // 类型
     private _skinName: string = null;           // 皮肤名
@@ -44,11 +46,12 @@ export default class FC_PlaneModel extends Comm_Model {
     private _position: cc.Vec2 = null;          // 位置
     private _direction: DIRECTION = null;       // 方向
     private _location: number = null;           // 在棋盘上的序号坐标
-    private _inOuter: boolean = false;          // 在外环
-    private _inInner: boolean = false;          // 在内环
+    private _stopPos: cc.Vec2 = null;           // 停驻坐标
+    private _waitPos: cc.Vec2 = null;           // 等待坐标
+    public inOuter: boolean = false;            // 在外环
+    public inInner: boolean = false;            // 在内环
     public inStopArea: Boolean = null;          // 在停驻区域
     public inWaitArea: Boolean = null;          // 在等待区域
-    public inRoutes: Boolean = null;            // 在航线上
     public inEndArea: Boolean = null;           // 抵达终点
     public isMoving: Boolean = null;            // 是否在移动中(进入航线才有效)
     public hasFlying: Boolean = null;           // 有没有飞行过
@@ -92,21 +95,36 @@ export default class FC_PlaneModel extends Comm_Model {
             cod = CommFunc.getCommand(msg, FC_PlaneModel.PLANE_DIRECTION.RIGHT);
         }
         this.sendMessageToContronller(cod);
+    };
+
+    public get locationIndex(): number{
+        return this._location;
+    };
+    public set locationIndex(num: number){
+        this._location = num;
+    };
+
+    // 在航线
+    public get inRoutes(): boolean{
+        return (this.inInner || this.inOuter);
     }
 
     // 初始化
-    public init(points: FC_ChessPoint){
-        this.position = points.pos;
-        this.direction = points.direction;
+    public init(points: FC_ChessPoint[]){
+        let stopPoint = points[0];
+        let waitPoint = points[1];
+        this._stopPos = stopPoint.pos;
+        this._waitPos = waitPoint.pos;
+        this.position = stopPoint.pos;
+        this.direction = stopPoint.direction;
         this.inStopArea = true;
         this.inWaitArea = false;
-        this.inRoutes = false;
         this.inEndArea = false;
         this.isMoving = false;
         this.hasFlying = false;
 
-        this._inOuter = false;
-        this._inInner = false;
+        this.inOuter = false;
+        this.inInner = false;
 
         if(this._type === PLANE_TYPE.THE_RED){
             this._skinName = FC_PlaneModel.PLANE_SKIN_NAME.RED;
@@ -119,22 +137,40 @@ export default class FC_PlaneModel extends Comm_Model {
         }
     };
 
-    // 播放等待动画
-    public playStandbyAnim(){
+    // 等待
+    public standby(){
         let cod_1 = CommFunc.getCommand([COMMAND_PLANE.play_anim], FC_PlaneModel._StandbyAnimName);
         this.sendMessageToContronller(cod_1);
         let cod_2 = CommFunc.getCommand([COMMAND_PLANE.allow_touch]);
         this.sendMessageToContronller(cod_2);
     };
 
-    // 播放坠毁动画
-    public playFallAnim(){
-        let cod = CommFunc.getCommand([COMMAND_PLANE.play_anim], FC_PlaneModel._FallAnimName);
+    // 进入等待区
+    public moveToWaitArea(){
+        let data = {
+            targetArr:[ {pos: this._waitPos, rotation: this._direction}],
+            moveTime: FC_PlaneModel._AnimTime
+        };
+        let cod = CommFunc.getCommand(COMMAND_PLANE.move_to, data);
+    };
+
+    // 遣返回停驻区
+    public backToStopArea(){
+        let data = {
+            targetArr:[ {pos: this._stopPos, rotation: this._direction}],
+            moveTime: FC_PlaneModel._AnimTime
+        };
+        let cod = CommFunc.getCommand(COMMAND_PLANE.move_to, data);
         this.sendMessageToContronller(cod);
     };
 
-    // 进入等待区
 
+
+
+    // 移动
+    public moveTo(){
+
+    };
 
     /**
      * 接收反馈

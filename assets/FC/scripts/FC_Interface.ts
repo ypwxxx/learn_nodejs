@@ -1,5 +1,6 @@
 import FC_ChessPoint from "./FC_ChessPoint";
 import FC_PlaneModel from "./FC_PlaneModel";
+import FC_PlayerModel from "./FC_PlayerModel";
 
 // 接口
 
@@ -26,4 +27,11 @@ export interface PlaneChesserObject {
     yellow: FC_PlaneModel[],
     blue: FC_PlaneModel[],
     green: FC_PlaneModel[]
+};
+// 玩家对象类型
+export interface PlayerObject {
+    red: FC_PlayerModel,
+    yellow: FC_PlayerModel,
+    blue: FC_PlayerModel,
+    green: FC_PlayerModel
 };

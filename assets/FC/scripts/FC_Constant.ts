@@ -7,8 +7,9 @@ export const GAME_BASE_DATA = {
     chesser_inner_singer_count: 6,                  // 内环单方棋点数量
     player_max_count: 4,                            // 最大玩家数量
     player_min_count: 2,                            // 最小玩家数量
-    player_chesser_count: 4,                // 玩家棋子数量
-    active_plane_num: [[2, 4, 6], [5, 6], [6]],     // 起飞号码
+    player_chesser_count: 4,                        // 玩家棋子数量
+    launch_plane_num: [[2, 4, 6], [5, 6], [6]],     // 起飞号码
+    continuous_throwing_num: 6,                     // 连续投掷的点数
 }
 
 /**
@@ -52,6 +53,13 @@ export enum PLAYER_TYPE {
 };
 
 /**
+ * UI类型
+ */
+export enum UI_TYPE {
+    
+}
+
+/**
  * 指令
  */
 export const COMMAND_PLANE = {
@@ -69,5 +77,7 @@ export const COMMAND_PLANE = {
  * 事件
  */
 export const FC_EVENT = {
+    GAME_RESTART: "fc_game_restart",                        // 重新开始游戏
+
     PLAYER_DICE_NUM: 'fc_player_dice_num',                  // 玩家骰子数          
 }

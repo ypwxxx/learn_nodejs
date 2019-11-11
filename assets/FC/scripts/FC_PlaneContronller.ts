@@ -137,6 +137,7 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
 
         let animName: string = command.content;
         if(typeof animName === 'string'){
+            this.planeAnim.stop();
             this.planeAnim.play(animName);
         }else{
             Comm_Log.warn('plane动画播放指令参数错误');
@@ -144,7 +145,7 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
     };
 
     /**
-     * 播放动画
+     * 允许点击
      * @param command 
      */
     private _allowTouch(command: Comm_Command){
@@ -167,6 +168,7 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
         let targetArr = command.content.targetArr;
         let moveTime = command.content.moveTime;
         if(Array.isArray(targetArr)){
+            this.planeAnim.stop();
             this._moveCallback(-1, targetArr, moveTime);
         }else{
             Comm_Log.warn('plane移动指令参数错误');
@@ -206,6 +208,7 @@ export default class FC_PlaneContronller extends Comm_ContronllerComponent {
     // 点击
     private _touchEnd(){
         if(this._canTouch){
+            this.planeAnim.stop();
             let cod: Comm_Command = CommFunc.getCommand([COMMAND_PLANE.feedback_be_touch]);
             this.sendMessageToModel(cod);
             this._canTouch = false;

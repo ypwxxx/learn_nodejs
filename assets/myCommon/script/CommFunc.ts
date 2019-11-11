@@ -82,7 +82,13 @@ export default class CommFunc {
      */
     public deepClone(obj: any): any{
         //判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
-        let objClone = Array.isArray(obj) ? [] : {};
+        let objClone = null;
+        if(!Array.isArray(obj) && typeof obj === 'object'){
+            objClone = obj;
+            return objClone;
+        }
+
+        objClone = Array.isArray(obj) ? [] : {};
         //进行深拷贝的不能为空，并且是对象或者是
         if (obj && typeof obj === "object") {
             for (let key in obj) {
